@@ -1,2 +1,2 @@
 # submarine
-Collection repository for homeade rc-submarine
+Collection repository for homemade rc-submarine
