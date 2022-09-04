@@ -10,8 +10,25 @@ git checkout pub-test-v20220304
 
 sudo cp conf/MT7603USTA.dat /lib/firmware/MT7603USTA.dat
 
+echo "\n"
+
+echo "Enter architecture: "
+read ARCHITECTURE
+
+echo "Architecture is $ARCHITECTURE"
+echo "Continue (y/n): "
+
+read answer
+
+if [ answer == 'y' ] || [ answer == 'Y' ]
+then
+    continue
+else
+    exit 0
+fi
+
 ### CHANGE FILE CONTENTS
-sed -i 's/ARCH ?= x86_64/ARCH ?= arm64/g' Makefile
+sed -i "s/ARCH ?= x86_64/ARCH ?= $ARCHITECTURE/g" Makefile
 
 # build
 make KSRC=/lib/modules/$(uname -r)/build -j4
@@ -30,8 +47,8 @@ echo "Enter wlan adapter: "
 read WLAN_ADAPTER
 
 echo "MAC adress is $MAC_ADRESS"
-echo "adapter name is $WLAN_ADAPTER"
-echo "continue (y/n): "
+echo "Adapter name is $WLAN_ADAPTER"
+echo "Continue (y/n): "
 
 read answer
 
