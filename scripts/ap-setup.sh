@@ -2,6 +2,10 @@
 
 # https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-routed-wireless-access-point
 
+echo "Are all packages up to date?"
+echo "Is raspi-config > System Options > Wireless LAN set to SE?"
+echo ""
+
 WLAN_ADAPTER="$1"
 AP_IP_ADDRESS_BASE="10.10.10"
 
