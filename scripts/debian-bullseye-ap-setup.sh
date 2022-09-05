@@ -1,19 +1,19 @@
 #!/bin/sh
 
 # https://www.raspberrypi.com/documentation/computers/configuration.html#setting-up-a-routed-wireless-access-point
-
-echo "Are all packages up to date?"
-echo "Is raspi-config > System Options > Wireless LAN set to SE?"
+echo "Have you upgraded your packages?"
+echo "If you are executing this script on a rpi 3b, have you configured the country code?" # raspi-config > System Options > Wireless LAN set to COUNTRY
 echo ""
 
 WLAN_ADAPTER="$1"
 AP_IP_ADDRESS_BASE="10.10.10"
+COUNTRY="SE"
 
 echo "Adapter name is $WLAN_ADAPTER"
+echo "If not, remeber to pass it as a command line argument when executing this script..."
 echo "Continue (y/n): "
 
 read answer
-
 if [ "$answer" = "y" -o "$answer" = "Y" ]
 then
     echo "Starting..."
@@ -43,7 +43,7 @@ address=/gw.wlan/$AP_IP_ADDRESS_BASE.1
                 # Alias for this router" | sudo tee /etc/dnsmasq.conf
 echo "\n"
 
-echo "country_code=SE
+echo "country_code=$COUNTRY
 interface=$WLAN_ADAPTER
 ssid=submarine-wifi
 hw_mode=g
