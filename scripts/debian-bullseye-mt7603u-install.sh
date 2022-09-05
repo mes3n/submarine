@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apk install git  # install git for alpineOS
+sudo apt install git linux-headers # Install needed packages
 
 # https://github.com/ChalesYu/buildroot_platform_hardware_wifi_mtk_drivers_mt7603
 cd
@@ -12,7 +12,7 @@ sudo cp conf/MT7603USTA.dat /lib/firmware/MT7603USTA.dat
 
 echo "\n"
 
-echo "Enter architecture: "
+echo "Enter the architecture of this system (arm64/x86_64): "
 read ARCHITECTURE
 
 echo "Architecture is $ARCHITECTURE"
@@ -27,15 +27,16 @@ else
     exit 0
 fi
 
-### CHANGE FILE CONTENTS
+### Change Makefile options
 sed -i "s/ARCH ?= x86_64/ARCH ?= $ARCHITECTURE/g" Makefile
 
-# build
-make KSRC=/lib/modules/$(uname -r)/build -j4
+# Build
+make KSRC=/lib/modules/$(uname -r)/build -j$(nproc --all)
 sudo cp os/linux/mt7603usta.ko /lib/modules/$(uname -r)/kernel/drivers/net/wireless/
 sudo depmod -a
 sudo modprobe mt7603usta
 
+### Keep wlanX persistent after reboots
 echo 
 ip a
 echo
