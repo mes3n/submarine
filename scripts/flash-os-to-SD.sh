@@ -28,4 +28,4 @@ wget -O flash-util/downloads/os.img.xz $URL
 
 echo "\n"
 
-xzcat downloads/os.img.xz | sudo dd bs=4M of=$DISK
+# xzcat downloads/os.img.xz | sudo dd bs=4M of=$DISK
