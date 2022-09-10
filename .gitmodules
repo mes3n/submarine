@@ -1,6 +1,6 @@
-[submodule "submarine-app"]
-	path = submarine-app
-	url = https://github.com/mes3n/submarine-app
+[submodule "submarine-ui"]
+	path = submarine-ui
+	url = https://github.com/mes3n/submarine-ui
 [submodule "submarine-mainframe"]
 	path = submarine-mainframe
 	url = https://github.com/mes3n/submarine-mainframe
