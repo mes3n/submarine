@@ -29,3 +29,14 @@ wget -O flash-util/downloads/os.img.xz $URL
 echo "\n"
 
 # xzcat downloads/os.img.xz | sudo dd bs=4M of=$DISK
+
+sudo mkdir flash-util/mnt
+sudo mount /dev/sdc1 flash-util/mnt
+cd flash-util/mnt
+sudo touch ssh  # enable ssh
+echo "pi:$(openssl passwd -6 'raspberry')" | sudo tee userconf.txt  # add user pi with passwd raspberry (default)
+cd ../..
+
+sudo umount /dev/sdc*
+
+echo "done"
