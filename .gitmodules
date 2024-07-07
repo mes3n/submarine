@@ -1,8 +1,10 @@
 [submodule "submarine-ui"]
 	path = submarine-ui
 	url = https://github.com/mes3n/submarine-ui
-	branch = main
-[submodule "submarine-mainframe"]
-	path = submarine-mainframe
-	url = https://github.com/mes3n/submarine-mainframe
-	branch = main
+[submodule "submarine-steering"]
+	path = submarine-steering
+	url = https://github.com/mes3n/submarine-steering
+[submodule "layers/poky"]
+	path = layers/poky
+	url = git://git.yoctoproject.org/poky.git
+	branch = scarthgap
