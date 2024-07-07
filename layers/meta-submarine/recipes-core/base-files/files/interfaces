@@ -1,0 +1,6 @@
+auto lo
+iface lo inet loopback
+
+iface wlan0 inet static
+    address 10.10.10.1
+
