@@ -2,10 +2,13 @@ SUMMARY = "Basic image for managing submarine"
 
 inherit core-image
 
-hostname:pn-base-files = "submarine"
-MOTD = "Welcome to the submarine system!"
-
 IMAGE_FEATURES += "ssh-server-dropbear"
 
 # Networking needed for WAP
-IMAGE_INSTALL:append = " dnsmasq hostapd"
+IMAGE_INSTALL:append = " \
+    linux-firmware-ath9k \
+    dnsmasq \
+    hostapd \
+"
+
+IMAGE_FSTYPES = "wic wic.gz wic.bmap"

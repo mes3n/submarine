@@ -31,8 +31,8 @@ DOCKER_CMD=docker run --rm --tty --interactive --net host \
 	$(DOCKER_CMD_OPTIONS) \
 	$(DOCKER_IMAGE):$(DOCKER_TAG)
 
-cmd ?= :
-docker-run: docker-build-image submodules
+cmd ?= bash -i
+yocto-shell: docker-build-image submodules
 	$(DOCKER_CMD) bash -c "TEMPLATECONF=$(TEMPLATE_DIR) \
 		. layers/poky/oe-init-build-env && $(cmd)"
 
