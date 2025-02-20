@@ -13,11 +13,3 @@ RUN ( \
 )
 
 RUN locale-gen en_US.UTF-8
-
-ARG USERID=1000
-RUN id user 2>/dev/null || useradd -m -u $USERID -s /bin/bash user
-RUN echo "user:user" | chpasswd
-
-USER user
-WORKDIR /home/user
-

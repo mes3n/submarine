@@ -29,7 +29,7 @@ case "$1" in
     start)
         echo -n "Starting $DESC: "
         start-stop-daemon -S -x $DAEMON -p $PIDFILE \
-            -b -m -- $ARGS
+            -b -m --chuid gpiod:gpiod -- $ARGS
         echo "$NAME."
         ;;
     stop)

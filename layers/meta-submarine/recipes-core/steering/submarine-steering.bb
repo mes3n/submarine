@@ -4,22 +4,26 @@ SRC_URI = "git://github.com/mes3n/submarine-steering;protocol=https;branch=main"
 
 PV = "1.0+git"
 SRCREV = "${AUTOREV}"
-PROVIDES = "submarine-steering"
-DEPENDS = "libgpiod"
+DEPENDS:append = " libgpiod"
+RDEPENDS:append:${PN} = " udev"
 
 S = "${WORKDIR}/git"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 SRC_URI:append = " \
+	file://60-gpiod.rules \
 	file://defconfig \
 	file://init \
 "
+
+inherit useradd
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM:${PN} = "-r gpiod"
 
 inherit update-rc.d
 INITSCRIPT_NAME = "steering"
 
 FILES:${PN} += " \
-	/bin/${PN} \
 	${sysconfdir}/steering.conf \
 	${sysconfdir}/init.d/${INITSCRIPT_NAME} \
 "
@@ -36,11 +40,13 @@ do_compile () {
 }
 
 do_install () {
-	install -d ${D}${bindir} ${D}${sysconfdir} ${D}${sysconfdir}/init.d
+	install -d ${D}${bindir} ${D}${sysconfdir} ${D}${sysconfdir}/init.d \
+	           ${D}${sysconfdir}/udev/rules.d
 
 	install -m 0755 ${S}/bin/${PN} ${D}${bindir}/${PN}
 	install -m 0644 ${S}/main.conf ${D}${sysconfdir}/steering.conf
 
 	install -m 0755 ${UNPACKDIR}/init ${D}${sysconfdir}/init.d/${INITSCRIPT_NAME}
+	install -m 0755 ${UNPACKDIR}/60-gpiod.rules ${D}${sysconfdir}/udev/rules.d
 }
 

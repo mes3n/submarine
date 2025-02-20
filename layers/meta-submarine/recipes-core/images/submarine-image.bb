@@ -1,20 +1,20 @@
 SUMMARY = "Basic image for managing submarine"
 
-inherit core-image
+inherit core-image extrausers
 
-IMAGE_FEATURES += "ssh-server-dropbear"
+IMAGE_FEATURES:remove = "debug-tweaks"
 
 # Networking needed for WAP
 IMAGE_INSTALL:append = " \
-    linux-firmware-mt7601u \
     linux-firmware-ath9k \
     dnsmasq \
     hostapd \
 "
 
-# GPIO CLI
-IMAGE_INSTALL:append = " \
-    libgpiod-tools \
+# printf "%q" $(openssl passwd -1 IngetVattenTack)
+PASSWD = "\$1\$ZtO3RGsS\$GXTi6opX2RQHtpXDTfrA4/"
+EXTRA_USERS_PARAMS = " \
+    usermod -p '${PASSWD}' root; \
 "
 
 IMAGE_INSTALL:append = " submarine-steering"
